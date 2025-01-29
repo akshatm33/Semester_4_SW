@@ -1,6 +1,65 @@
-.grid {
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    background: linear-gradient(135deg, #9aa9ff, #fac4ea); /* Gradient background */
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    color: #333;
+  }
+  
+  h1 {
+    margin-top: 20px;
+    font-size: 2.5rem;
+    color: #fff; /* White text for contrast */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Text shadow for depth */
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+    color: #444;
+  }
+  
+  /* Grid and Cards */
+  .grid {
     display: flex;
     flex-wrap: wrap;
     width: 400px;
     height: 300px;
-}
+    margin: 20px auto;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Soft shadow */
+  }
+  
+  .grid img {
+    width: 80px;
+    height: 80px;
+    margin: 5px;
+    border: 3px solid #ff6f61; /* Bright border color */
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    background: #fff; /* White background for cards */
+  }
+  
+  .grid img:hover {
+    transform: scale(1.1);
+    border-color: #ff3b2f; /* Brighter border on hover */
+  }
+  
+  /* Timer and Score */
+  #result, #timer {
+    font-weight: bold;
+    color: #ff6f61; /* Matching the card border color */
+  }
+  
+  /* Game Completion Message */
+  .congratulations {
+    font-size: 1.8rem;
+    color: #4caf50; /* Green for success */
+    margin-top: 20px;
+  }
