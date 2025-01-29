@@ -1,66 +1,77 @@
-    const computerChoiceDisplay = document.getElementById('computer-choice')
-    const userChoiceDisplay = document.getElementById('user-choice')
-    const resultDisplay = document.getElementById('result')
-    const possibleChoices = document.querySelectorAll('button')
-    const resetButton = document.getElementById('reset'); 
-    let userChoice
-    let computerChoice
-    let result
+const computerChoiceDisplay = document.getElementById('computer-choice');
+const userChoiceDisplay = document.getElementById('user-choice');
+const resultDisplay = document.getElementById('result');
+const possibleChoices = document.querySelectorAll('button');
+const resetButton = document.getElementById('reset');
+const winsDisplay = document.getElementById('wins');
+const lossesDisplay = document.getElementById('losses');
+const tiesDisplay = document.getElementById('ties');
 
-    possibleChoices.forEach(possibleChoice => possibleChoice.addEventListener('click', (e) => {
-        if (e.target.id === 'reset') return;
-        userChoice = e.target.id
-        userChoiceDisplay.innerHTML = userChoice
-        generateComputerChoice()
-        getResult()
-    }))
+let userChoice;
+let computerChoice;
+let result;
+let wins = 0;
+let losses = 0;
+let ties = 0;
 
-    function generateComputerChoice() {
-        const randomNumber = Math.floor(Math.random() * 3) + 1
-        
-        if (randomNumber === 1) {
-            computerChoice = 'rock'
-        }
-        if (randomNumber === 2) {
-            computerChoice = 'scissors'
-        }
-        if (randomNumber === 3) {
-            computerChoice = 'paper'
-        }
-        computerChoiceDisplay.innerHTML = computerChoice
+possibleChoices.forEach(possibleChoice => possibleChoice.addEventListener('click', (e) => {
+    if (e.target.id === 'reset') return;
+    userChoice = e.target.id;
+    userChoiceDisplay.innerHTML = userChoice;
+    generateComputerChoice();
+    getResult();
+}));
+
+function generateComputerChoice() {
+    const randomNumber = Math.floor(Math.random() * 3) + 1;
+
+    if (randomNumber === 1) {
+        computerChoice = 'rock';
+    }
+    if (randomNumber === 2) {
+        computerChoice = 'scissors';
+    }
+    if (randomNumber === 3) {
+        computerChoice = 'paper';
+    }
+    computerChoiceDisplay.innerHTML = computerChoice;
+}
+
+function getResult() {
+    if (computerChoice === userChoice) {
+        result = 'It\'s a tie!';
+        ties++;
+    } else if (
+        (computerChoice === 'rock' && userChoice === 'paper') ||
+        (computerChoice === 'paper' && userChoice === 'scissors') ||
+        (computerChoice === 'scissors' && userChoice === 'rock')
+    ) {
+        result = 'You win!';
+        wins++;
+    } else {
+        result = 'You lost!';
+        losses++;
     }
 
-    function getResult() {
-        if (computerChoice === userChoice) {
-            result = 'its a tie'
-        }
-        if (computerChoice === 'rock' && userChoice ==="paper") {
-            result = 'you win!'
-        }
-        if (computerChoice === 'rock' && userChoice ==="scissors") {
-            result = 'you lost!'
-        }
-        if (computerChoice === 'paper' && userChoice ==="scissors") {
-            result = 'you win!'
-        }
-        if (computerChoice === 'paper' && userChoice ==="rock") {
-            result = 'you lost!'
-        }
-        if (computerChoice === 'scissors' && userChoice ==="rock") {
-            result = 'you win!'
-        }
-        if (computerChoice === 'scissors' && userChoice ==="paper") {
-            result = 'you lost!'
-        }
+    resultDisplay.innerHTML = result;
+    updateScoreboard();
+}
 
-        resultDisplay.innerHTML = result
-    }
+function updateScoreboard() {
+    winsDisplay.innerHTML = `Wins: ${wins}`;
+    lossesDisplay.innerHTML = `Losses: ${losses}`;
+    tiesDisplay.innerHTML = `Ties: ${ties}`;
+}
 
-    resetButton.addEventListener('click', () => {
-        computerChoice = '';
-        userChoice = '';
-        result = '';
-        computerChoiceDisplay.innerHTML = '';
-        userChoiceDisplay.innerHTML = '';
-        resultDisplay.innerHTML = '';
-    });
+resetButton.addEventListener('click', () => {
+    computerChoice = '';
+    userChoice = '';
+    result = '';
+    computerChoiceDisplay.innerHTML = '';
+    userChoiceDisplay.innerHTML = '';
+    resultDisplay.innerHTML = '';
+    wins = 0;
+    losses = 0;
+    ties = 0;
+    updateScoreboard();
+});
